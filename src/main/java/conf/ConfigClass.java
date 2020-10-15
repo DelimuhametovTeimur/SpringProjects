@@ -2,6 +2,7 @@ package conf;
 
 import model.Animal;
 import model.Cat;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +17,14 @@ public class ConfigClass {
     }
 
     @Bean
+    @Qualifier("cat")
     Animal getAnimal() {
-        Animal animal = new Animal();
-        animal.setCat(getCat());
-        return animal;
+        return new Animal(getCat());
+    }
+
+    @Bean
+    @Qualifier("dog")
+    Animal getAnimal2() {
+        return new Animal(getCat());
     }
 }
